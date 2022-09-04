@@ -4,6 +4,7 @@
     package="com.example.mychat" >
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,8 +15,13 @@
         android:theme="@style/Theme.MyChat"
         tools:targetApi="31" >
         <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.MyChat.NoActionBar" />
+        <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +37,6 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true" >
-
         </activity>
     </application>
 

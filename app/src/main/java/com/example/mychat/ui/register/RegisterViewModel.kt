@@ -1,10 +1,15 @@
 package com.example.mychat.ui.register
 
-import android.util.Patterns
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.example.mychat.base.BaseViewModel
+import com.example.mychat.database.DatabaseDao
+import com.google.firebase.auth.ktx.auth
+import com.example.mychat.database.User
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.ktx.Firebase
 
-class RegisterViewModel :ViewModel(){
+class RegisterViewModel :BaseViewModel<RegisterNavigator>(){
 
     var fullName=ObservableField<String>()
     var email= ObservableField<String>()
@@ -14,11 +19,37 @@ class RegisterViewModel :ViewModel(){
     var emailError= ObservableField<Boolean>()
     var passwordError= ObservableField<Boolean>()
 
+    val firebaseAuth=Firebase.auth
+
     fun register(){
         if (!valid()) return
+        showloading.value=true
+        firebaseAuth.createUserWithEmailAndPassword(email.get()!!,password.get()!!)
+            .addOnCompleteListener {task->
+                showloading.value=false
+                if (task.isSuccessful){
+                    addUserToDatabase(firebaseAuth.currentUser?.uid)
+                }else{
+                    messageLiveData.value= task.exception!!.localizedMessage
+                }
+            }
+            .addOnFailureListener {it->
+                messageLiveData.value=it.localizedMessage
+            }
 
-        // register user . . .
+    }
 
+    private fun addUserToDatabase(uid: String?) {
+        val user=User(uid, email.get(),fullName.get())
+        DatabaseDao.addUser(user) {it->
+            showloading.value=false
+            if (it.isSuccessful){
+                navigator?.goToHome()
+
+            }else{
+                messageLiveData.value= it.exception!!.localizedMessage
+            }
+        }
     }
 
 
@@ -45,6 +76,9 @@ class RegisterViewModel :ViewModel(){
         return isValid
     }
 
+    fun goToLogin(){
+        navigator?.goToLogin()
+    }
 
 
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mychat.base.BaseActivity
 import com.example.mychat.R
 import com.example.mychat.databinding.ActivityLoginBinding
+import com.example.mychat.ui.home.HomeActivity
 import com.example.mychat.ui.register.RegisterActivity
 
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() ,LoginNavigator{
@@ -29,6 +30,11 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() ,Logi
 
     override fun goToRegister() {
         startActivity(Intent(this,RegisterActivity::class.java))
+        finish()
+    }
+
+    override fun goToHome() {
+        startActivity(Intent(this,HomeActivity::class.java))
         finish()
     }
 }

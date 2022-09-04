@@ -8,9 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
 
-abstract class BaseActivity<VM:ViewModel,DB:ViewDataBinding>:AppCompatActivity() {
+abstract class BaseActivity<VM:BaseViewModel<*>,DB:ViewDataBinding>:AppCompatActivity() {
     lateinit var viewModel:VM
     lateinit var viewBinding:DB
 
@@ -18,7 +17,21 @@ abstract class BaseActivity<VM:ViewModel,DB:ViewDataBinding>:AppCompatActivity()
         super.onCreate(savedInstanceState)
         viewModel=inilazeViewModel()
         viewBinding=DataBindingUtil.setContentView(this,getLayoutId())
+        viewModel.messageLiveData.observe(this) {message->
+        showDialog(message=message, posActionName = "Ok", posAction = {dialog,which->
+            dialog.dismiss()
+        })
+        }
+        viewModel.showloading.observe(this) {show->
+            if (show){
+                showProgressDialog("Loading ...")
+            }else{
+                hideProgressDialog()
+            }
+
+        }
     }
+
 
     abstract fun getLayoutId(): Int
     abstract fun inilazeViewModel(): VM
@@ -26,19 +39,23 @@ abstract class BaseActivity<VM:ViewModel,DB:ViewDataBinding>:AppCompatActivity()
     fun makeToast(message:String){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
+    var dialog : ProgressDialog?=null
     fun showProgressDialog(message:String){
-        val dialog= ProgressDialog(this)
-        dialog.setCancelable(false)
-        dialog.setMessage(message)
-        dialog.show()
+        dialog=ProgressDialog(this)
+        dialog!!.setCancelable(false)
+        dialog!!.setMessage(message)
+        dialog!!.show()
 
     }
+    private fun hideProgressDialog() {
+        dialog!!.dismiss()
+    }
 
-    fun showDialog(title:String?=null,message:String? ,
+
+    fun showDialog(message:String?=null ,title:String?=null,
                     posActionName:String?=null
                    ,posAction:DialogInterface.OnClickListener?=null,
-                    negActionName:String?,negAction:DialogInterface.OnClickListener?=null){
+                    negActionName:String?=null,negAction:DialogInterface.OnClickListener?=null){
         val dialog=AlertDialog.Builder(this).apply {
             setMessage(message)
             setTitle(title)
