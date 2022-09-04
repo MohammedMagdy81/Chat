@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.mychat.ui.login.LoginViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="126dp"
+                android:layout_height="132dp"
+                android:src="@drawable/main_top"
+                android:paddingBottom="10dp"
+                android:scaleType="centerCrop"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_text"
+                android:textSize="20sp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="50dp"
+                android:textColor="@color/main_color"
+                android:textStyle="bold"
+                android:letterSpacing=".05" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:background="@drawable/login" />
+
+        <EditText
+            android:id="@+id/loginEditTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/sign"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/e_mail_hint"
+            android:text="@={vm.email}"
+            android:gravity="center"
+            android:textColorHint="@color/black"
+            android:paddingStart="16dp"
+            />
+        <TextView
+            android:id="@+id/loginEmailError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-mail Can't be Empty !"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:visibility="@{vm.emailError?View.VISIBLE:View.GONE}"
+            />
+        <EditText
+            android:id="@+id/loginEditTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/sign"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:text="@={vm.password}"
+            android:gravity="center"
+            android:textColorHint="@color/black"
+            android:paddingStart="16dp"
+            />
+        <TextView
+            android:id="@+id/loginPasswordError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter Password !"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:visibility="@{vm.passwordError?View.VISIBLE:View.GONE}"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="6dp"
+                android:textColor="@color/black"
+                android:text="@string/don_t_have_account"
+
+                />
+            <TextView
+                android:id="@+id/loginRegisterHereText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:padding="6dp"
+                android:text="@string/register_here"
+                android:textStyle="bold"
+                android:textColor="@color/main_color"
+                android:onClick="@{()->vm.goToRegister()}"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/loginButtonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:onClick="@{()->vm.login()}"
+            android:background="@drawable/button_shape" />
+
+    </LinearLayout>
+</layout>
