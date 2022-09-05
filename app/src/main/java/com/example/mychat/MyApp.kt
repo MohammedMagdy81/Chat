@@ -1,8 +1,8 @@
 package com.example.mychat
 
-import android.support.multidex.MultiDexApplication
+import android.app.Application
 
-class MyApp: MultiDexApplication() {
+class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
 

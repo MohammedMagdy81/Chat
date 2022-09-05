@@ -1,10 +1,10 @@
 package com.example.mychat.ui.login
 
 import androidx.databinding.ObservableField
+import com.example.mychat.Data
 import com.example.mychat.base.BaseViewModel
-import com.example.mychat.database.DatabaseDao
-import com.example.mychat.database.User
-import com.google.android.gms.tasks.OnCompleteListener
+import com.example.mychat.database.dao.UserDao
+import com.example.mychat.database.model.User
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -27,8 +27,6 @@ class LoginViewModel:BaseViewModel<LoginNavigator>() {
                 if (task.isSuccessful){
                     // retrieve user From FireStore
                     getUserData(firebaseAuth.currentUser!!.uid)
-                    // go to Home Page
-                   navigator?.goToHome()
                 }else{
                     showloading.value=false
                 messageLiveData.value=task.exception?.localizedMessage
@@ -40,10 +38,12 @@ class LoginViewModel:BaseViewModel<LoginNavigator>() {
     }
 
     private fun getUserData(uid: String) {
-        DatabaseDao.getUserData(uid) {task->
+        UserDao.getUserData(uid) { task->
             if (task.isSuccessful){
                 val user =task.result.toObject(User::class.java)//User retrieve from database
-
+                Data.usee= user
+                // go to home
+                navigator?.goToHome()
             }else{
                 messageLiveData.value=task.exception?.localizedMessage
             }

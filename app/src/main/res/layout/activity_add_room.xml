@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.mychat.ui.addRoom.AddRoomViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#90E8E3E3"
+        tools:context=".ui.addRoom.AddRoomActivity">
+
+        <EditText
+            android:id="@+id/addRoomName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="Room Name"
+            android:text="@={vm.addRoomName}"
+            android:textColorHint="@color/black"
+            android:paddingStart="16dp"
+            android:maxLength="15"
+            />
+
+        <EditText
+            android:id="@+id/addRoomDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@={vm.addRoomDesc}"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="Room Desc"
+            android:maxLength="20"
+            android:lines="5"
+           android:maxLines="4"
+            android:textColorHint="@color/black"
+            android:paddingStart="16dp"
+            />
+        <Button
+            android:id="@+id/addRoomButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/add_room"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:onClick="@{()->vm.addRoom()}"
+            android:background="@drawable/button_shape" />
+    </LinearLayout>
+</layout>

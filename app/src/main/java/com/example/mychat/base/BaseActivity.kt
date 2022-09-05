@@ -55,12 +55,15 @@ abstract class BaseActivity<VM:BaseViewModel<*>,DB:ViewDataBinding>:AppCompatAct
     fun showDialog(message:String?=null ,title:String?=null,
                     posActionName:String?=null
                    ,posAction:DialogInterface.OnClickListener?=null,
-                    negActionName:String?=null,negAction:DialogInterface.OnClickListener?=null){
+                    negActionName:String?=null,
+                   negAction:DialogInterface.OnClickListener?=null ,
+                    isCancelable:Boolean= true){
         val dialog=AlertDialog.Builder(this).apply {
             setMessage(message)
             setTitle(title)
             setPositiveButton(posActionName,posAction)
             setNegativeButton(negActionName,negAction)
+            setCancelable(isCancelable)
         }
         dialog.show()
 

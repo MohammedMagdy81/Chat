@@ -1,12 +1,11 @@
 package com.example.mychat.ui.register
 
+import android.util.Patterns
 import androidx.databinding.ObservableField
-import androidx.lifecycle.ViewModel
 import com.example.mychat.base.BaseViewModel
-import com.example.mychat.database.DatabaseDao
+import com.example.mychat.database.dao.UserDao
 import com.google.firebase.auth.ktx.auth
-import com.example.mychat.database.User
-import com.google.android.gms.tasks.OnCompleteListener
+import com.example.mychat.database.model.User
 import com.google.firebase.ktx.Firebase
 
 class RegisterViewModel :BaseViewModel<RegisterNavigator>(){
@@ -40,8 +39,8 @@ class RegisterViewModel :BaseViewModel<RegisterNavigator>(){
     }
 
     private fun addUserToDatabase(uid: String?) {
-        val user=User(uid, email.get(),fullName.get())
-        DatabaseDao.addUser(user) {it->
+        val user= User(uid, email.get(),fullName.get())
+        UserDao.addUser(user) { it->
             showloading.value=false
             if (it.isSuccessful){
                 navigator?.goToHome()
@@ -55,7 +54,7 @@ class RegisterViewModel :BaseViewModel<RegisterNavigator>(){
 
     fun valid():Boolean{
         var isValid= true
-        if (email.get().isNullOrBlank()){
+        if (email.get().isNullOrBlank()||!Patterns.EMAIL_ADDRESS.matcher(email.get() as CharSequence).matches()){
             emailError.set(true)
             isValid=false
         }else{
