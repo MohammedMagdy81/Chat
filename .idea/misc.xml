@@ -4,15 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/drawable/button_shape.xml" value="0.136" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/drawable/chat_et_bg.xml" value="0.136" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/drawable/ic_send.xml" value="0.136" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/drawable/received_design.xml" value="0.136" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/drawable/send_design.xml" value="0.136" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/drawable/sign.xml" value="0.136" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_add_room.xml" value="0.2" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_login.xml" value="0.176" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_room_details.xml" value="0.2" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/activity_start.xml" value="0.2" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/item_receive.xml" value="0.25" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/item_room.xml" value="0.2" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/MyChat/app/src/main/res/layout/item_send.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>

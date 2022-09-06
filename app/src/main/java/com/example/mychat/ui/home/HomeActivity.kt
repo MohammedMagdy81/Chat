@@ -7,12 +7,13 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import com.example.mychat.R
 import com.example.mychat.base.BaseActivity
+import com.example.mychat.database.model.Room
 import com.example.mychat.databinding.ActivityHomeBinding
 import com.example.mychat.ui.addRoom.AddRoomActivity
+import com.example.mychat.ui.roomDetails.RoomDetailsActivity
 
 class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNavigator {
     lateinit var roomsAdapter: RoomsRecyclerAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding.vm = viewModel
@@ -45,8 +46,16 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNav
         viewBinding.roomsAddedRecyclerView.apply {
             setHasFixedSize(true)
             adapter = roomsAdapter
-        }
 
+        }
+        roomsAdapter.onItemClickListener = object : RoomsRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, room: Room) {
+                val intent = Intent(this@HomeActivity, RoomDetailsActivity::class.java)
+                intent.putExtra("room",room)
+                startActivity(intent)
+            }
+
+        }
 
     }
 
@@ -71,4 +80,9 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNav
     override fun inilazeViewModel(): HomeViewModel {
         return ViewModelProvider(this).get(HomeViewModel::class.java)
     }
+
+    companion object{
+        const val ROOM_KEY="room"
+    }
+
 }

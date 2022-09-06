@@ -41,7 +41,7 @@ class LoginViewModel:BaseViewModel<LoginNavigator>() {
         UserDao.getUserData(uid) { task->
             if (task.isSuccessful){
                 val user =task.result.toObject(User::class.java)//User retrieve from database
-                Data.usee= user
+                Data.user= user
                 // go to home
                 navigator?.goToHome()
             }else{

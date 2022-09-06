@@ -22,6 +22,11 @@ class RoomsRecyclerAdapter(var roomsList:List<Room>):RecyclerView.Adapter<RoomsR
         notifyDataSetChanged()
     }
 
+    var onItemClickListener:OnItemClickListener?=null
+    interface OnItemClickListener{
+        fun onItemClick(position:Int,room:Room)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
        val itemBinding:ItemRoomBinding=DataBindingUtil.inflate(LayoutInflater.from(parent.context),
            R.layout.item_room,parent,false)
@@ -29,7 +34,13 @@ class RoomsRecyclerAdapter(var roomsList:List<Room>):RecyclerView.Adapter<RoomsR
     }
 
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
-        holder.bind(roomsList.get(position))
+        val room=roomsList.get(position)
+        holder.bind(room)
+        if (onItemClickListener!=null){
+            holder.itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(position,room)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

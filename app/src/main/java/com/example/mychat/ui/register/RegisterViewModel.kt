@@ -2,6 +2,7 @@ package com.example.mychat.ui.register
 
 import android.util.Patterns
 import androidx.databinding.ObservableField
+import com.example.mychat.Data
 import com.example.mychat.base.BaseViewModel
 import com.example.mychat.database.dao.UserDao
 import com.google.firebase.auth.ktx.auth
@@ -43,6 +44,7 @@ class RegisterViewModel :BaseViewModel<RegisterNavigator>(){
         UserDao.addUser(user) { it->
             showloading.value=false
             if (it.isSuccessful){
+                Data.user=user
                 navigator?.goToHome()
 
             }else{
