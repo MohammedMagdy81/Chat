@@ -5,6 +5,7 @@ import com.example.mychat.Data
 import com.example.mychat.base.BaseViewModel
 import com.example.mychat.database.dao.MessageDao
 import com.example.mychat.database.model.Message
+import com.example.mychat.notification.MyFirebaseMessagingService
 import com.google.firebase.Timestamp
 
 class RoomDetailsViewModel : BaseViewModel<RooDetailsNavigator>() {

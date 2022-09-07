@@ -21,4 +21,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add_room">Add Room</string>
     <string name="enter_message">Enter Message ..</string>
+    <string name="channel_name">messages_channel</string>
+    <string name="channel_description">messages_description</string>
 </resources>

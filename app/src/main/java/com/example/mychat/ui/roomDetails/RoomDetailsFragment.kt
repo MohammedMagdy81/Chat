@@ -1,31 +1,33 @@
 package com.example.mychat.ui.roomDetails
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.mychat.R
-import com.example.mychat.base.BaseActivity
+import com.example.mychat.base.BaseFragment
 import com.example.mychat.database.dao.MessageDao
 import com.example.mychat.database.model.Message
 import com.example.mychat.database.model.Room
 import com.example.mychat.databinding.ActivityRoomDetailsBinding
 import com.google.firebase.firestore.DocumentChange
 
-class RoomDetailsActivity : BaseActivity<RoomDetailsViewModel, ActivityRoomDetailsBinding>() {
+class RoomDetailsFragment:BaseFragment<RoomDetailsViewModel, ActivityRoomDetailsBinding>(),RooDetailsNavigator {
     var room: Room? = null
     lateinit var messagesAdapter: MessagesAdapter
+    val args : RoomDetailsFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewBinding.vm = viewModel
-        room = intent.getParcelableExtra("room")
+        room =args.room
         viewBinding.roomName.text = room?.name
         viewModel.roomId = room?.id
         setUpAdapter()
         subscribeToRoomMessages(room?.id)
 
         viewBinding.icBack.setOnClickListener {
-            finish()
+            // requireActivity().finish()
         }
 
     }
@@ -59,6 +61,7 @@ class RoomDetailsActivity : BaseActivity<RoomDetailsViewModel, ActivityRoomDetai
             }
 
     }
+
 
     private fun setUpAdapter() {
         messagesAdapter = MessagesAdapter(mutableListOf())

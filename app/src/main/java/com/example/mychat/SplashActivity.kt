@@ -25,17 +25,5 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-//        val day= Timestamp.now().toDate().day.toString()
-//        val month= Timestamp.now().toDate().month.toString()
-//        val year= Timestamp.now().toDate().year.toString()
-//        val minute= Timestamp.now().toDate().minutes.toString()
-//        val hour= Timestamp.now().toDate().date.toString()
-//
-//        Log.d("SplashTimeStamp",day+"\n"+month+"\n"+year+"\n"+minute+"\n"+hour)
-    }
-
-
 
 }

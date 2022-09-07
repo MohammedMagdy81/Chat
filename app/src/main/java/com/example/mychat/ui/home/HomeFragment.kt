@@ -2,39 +2,37 @@ package com.example.mychat.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.mychat.R
-import com.example.mychat.base.BaseActivity
+import com.example.mychat.base.BaseFragment
 import com.example.mychat.database.model.Room
 import com.example.mychat.databinding.ActivityHomeBinding
 import com.example.mychat.ui.addRoom.AddRoomActivity
 import com.example.mychat.ui.roomDetails.RoomDetailsActivity
 
-class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNavigator {
+class HomeFragment : BaseFragment<HomeViewModel, ActivityHomeBinding>(), HomeNavigator {
     lateinit var roomsAdapter: RoomsRecyclerAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewBinding.vm = viewModel
         viewModel.navigator = this
-        setUpToolBar()
         setUpViews()
         observeLiveData()
     }
 
-    private fun setUpToolBar() {
-        val toolbar = viewBinding.toolbar
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        supportActionBar?.setDisplayShowHomeEnabled(true);
-    }
 
     private fun observeLiveData() {
-        viewModel.roomsLiveData.observe(this) {
+        viewModel.roomsLiveData.observe(viewLifecycleOwner) {
             roomsAdapter.changeData(it)
         }
     }
+
+
 
     override fun onStart() {
         super.onStart()
@@ -50,9 +48,9 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNav
         }
         roomsAdapter.onItemClickListener = object : RoomsRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(position: Int, room: Room) {
-                val intent = Intent(this@HomeActivity, RoomDetailsActivity::class.java)
-                intent.putExtra("room",room)
-                startActivity(intent)
+                val action = HomeFragmentDirections.actionHomeFragmentToRoomDetailsFragment(room)
+                findNavController().navigate(action)
+
             }
 
         }
@@ -60,18 +58,10 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNav
     }
 
     override fun goToAddRoom() {
-        val intent = Intent(this, AddRoomActivity::class.java)
-        startActivity(intent)
+
+        findNavController().navigate(R.id.action_homeFragment_to_addRoomFragment)
+
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
 
     override fun getLayoutId(): Int {
         return R.layout.activity_home
@@ -80,7 +70,5 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(), HomeNav
     override fun inilazeViewModel(): HomeViewModel {
         return ViewModelProvider(this).get(HomeViewModel::class.java)
     }
-
-
 
 }
