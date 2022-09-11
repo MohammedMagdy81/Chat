@@ -28,6 +28,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     fun showNotification(title: String, text: String) {
+
         val notificationBuilder = NotificationCompat.Builder(this, Data.MESSAGES_CHANEL_ID)
         notificationBuilder.apply {
             setContentTitle(title)
