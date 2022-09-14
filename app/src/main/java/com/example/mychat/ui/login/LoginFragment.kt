@@ -1,6 +1,5 @@
 package com.example.mychat.ui.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -8,10 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.mychat.R
 import com.example.mychat.base.BaseFragment
 import com.example.mychat.databinding.ActivityLoginBinding
-import com.example.mychat.ui.home.HomeActivity
-import com.example.mychat.ui.register.RegisterActivity
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class LoginFragment : BaseFragment<LoginViewModel, ActivityLoginBinding>(), LoginNavigator {
 

@@ -1,18 +1,13 @@
 package com.example.mychat.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mychat.R
 import com.example.mychat.base.BaseFragment
 import com.example.mychat.database.model.Room
 import com.example.mychat.databinding.ActivityHomeBinding
-import com.example.mychat.ui.addRoom.AddRoomActivity
-import com.example.mychat.ui.roomDetails.RoomDetailsActivity
 
 class HomeFragment : BaseFragment<HomeViewModel, ActivityHomeBinding>(), HomeNavigator {
     lateinit var roomsAdapter: RoomsRecyclerAdapter
@@ -42,7 +37,6 @@ class HomeFragment : BaseFragment<HomeViewModel, ActivityHomeBinding>(), HomeNav
     private fun setUpViews() {
         roomsAdapter = RoomsRecyclerAdapter(listOf())
         viewBinding.roomsAddedRecyclerView.apply {
-            setHasFixedSize(true)
             adapter = roomsAdapter
 
         }

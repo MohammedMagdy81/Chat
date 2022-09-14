@@ -3,13 +3,10 @@ package com.example.mychat.ui.start
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mychat.MainActivity
 import com.example.mychat.R
-import com.example.mychat.ui.home.HomeActivity
-import com.example.mychat.ui.login.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.example.mychat.ui.home.HomeFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -39,7 +36,9 @@ class StartActivity :AppCompatActivity() {
     }
 
     private fun goToHome() {
-        startActivity(Intent(this@StartActivity,HomeActivity::class.java))
+        startActivity(Intent(this@StartActivity,HomeFragment::class.java))
         finish()
+
+
     }
 }
