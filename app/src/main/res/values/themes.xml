@@ -15,8 +15,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.MyChat.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.MyChat.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.MyChat.noActionBar">
         <item name="windowActionBar">false</item>

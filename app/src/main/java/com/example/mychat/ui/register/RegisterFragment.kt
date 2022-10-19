@@ -20,7 +20,7 @@ class RegisterFragment:BaseFragment<RegisterViewModel, ActivityRegisterBinding>(
         return R.layout.activity_register
     }
 
-    override fun inilazeViewModel(): RegisterViewModel {
+    override fun initializeViewModel(): RegisterViewModel {
         return ViewModelProvider(this).get(RegisterViewModel::class.java)
     }
 

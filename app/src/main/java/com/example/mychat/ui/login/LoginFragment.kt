@@ -21,7 +21,7 @@ class LoginFragment : BaseFragment<LoginViewModel, ActivityLoginBinding>(), Logi
         return R.layout.activity_login
     }
 
-    override fun inilazeViewModel(): LoginViewModel {
+    override fun initializeViewModel(): LoginViewModel {
         return ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 

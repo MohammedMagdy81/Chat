@@ -2,8 +2,11 @@ package com.example.mychat.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.mychat.R
 import com.example.mychat.base.BaseFragment
 import com.example.mychat.database.model.Room
@@ -18,13 +21,20 @@ class HomeFragment : BaseFragment<HomeViewModel, ActivityHomeBinding>(), HomeNav
         viewModel.navigator = this
         setUpViews()
         observeLiveData()
-    }
 
+
+
+    }
 
     private fun observeLiveData() {
         viewModel.roomsLiveData.observe(viewLifecycleOwner) {
             roomsAdapter.changeData(it)
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
     }
 
 
@@ -61,7 +71,7 @@ class HomeFragment : BaseFragment<HomeViewModel, ActivityHomeBinding>(), HomeNav
         return R.layout.activity_home
     }
 
-    override fun inilazeViewModel(): HomeViewModel {
+    override fun initializeViewModel(): HomeViewModel {
         return ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 

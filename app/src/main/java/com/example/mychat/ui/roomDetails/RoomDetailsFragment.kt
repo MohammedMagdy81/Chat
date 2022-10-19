@@ -21,14 +21,10 @@ class RoomDetailsFragment:BaseFragment<RoomDetailsViewModel, ActivityRoomDetails
         super.onViewCreated(view, savedInstanceState)
         viewBinding.vm = viewModel
         room =args.room
-        viewBinding.roomName.text = room?.name
         viewModel.roomId = room?.id
         setUpAdapter()
         subscribeToRoomMessages(room?.id)
 
-        viewBinding.icBack.setOnClickListener {
-            // requireActivity().finish()
-        }
 
     }
 
@@ -37,7 +33,7 @@ class RoomDetailsFragment:BaseFragment<RoomDetailsViewModel, ActivityRoomDetails
             .orderBy("time")
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
-                    showDialog(message = e.localizedMessage)
+                    showDialog(message = e.localizedMessage?:"An unknown Error")
                     return@addSnapshotListener
                 }
 
@@ -75,7 +71,7 @@ class RoomDetailsFragment:BaseFragment<RoomDetailsViewModel, ActivityRoomDetails
         return R.layout.activity_room_details
     }
 
-    override fun inilazeViewModel(): RoomDetailsViewModel {
+    override fun initializeViewModel(): RoomDetailsViewModel {
         return ViewModelProvider(this).get(RoomDetailsViewModel::class.java)
     }
 }

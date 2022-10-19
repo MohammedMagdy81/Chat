@@ -4,58 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="vm"
-    type="com.example.mychat.ui.home.HomeViewModel" />
+
+        <variable
+            name="vm"
+            type="com.example.mychat.ui.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeActivity"
         android:background="#90E8E3E3"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-        >
+        tools:context=".ui.home.HomeActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/main_color"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp"
-            app:title="Rooms "
-            app:titleTextColor="#ffff"
-            />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_room_Fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
+            android:backgroundTintMode="add"
+            android:onClick="@{()->vm.goToAddRoom()}"
+            android:src="@drawable/ic_baseline_add_24"
+            app:backgroundTint="@color/main_color"
             app:borderWidth="0dp"
             app:fabSize="normal"
-            app:tint="@android:color/white"
-            android:backgroundTintMode="add"
-            app:backgroundTint="@color/main_color"
-            android:onClick="@{()->vm.goToAddRoom()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_baseline_add_24"
+            app:tint="@android:color/white"
 
-             />
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rooms_added_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:padding="6dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            android:padding="4dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

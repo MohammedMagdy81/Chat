@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -22,7 +23,7 @@ abstract class BaseFragment<VM:BaseViewModel<*>,DB: ViewDataBinding>:Fragment() 
         savedInstanceState: Bundle?
     ): View? {
         viewBinding= DataBindingUtil.inflate(inflater,getLayoutId(),container,false)
-        viewModel=inilazeViewModel()
+        viewModel=initializeViewModel()
 
         viewModel.messageLiveData.observe(viewLifecycleOwner) {message->
             showDialog(message=message, posActionName = "Ok", posAction = {dialog,which->
@@ -38,13 +39,12 @@ abstract class BaseFragment<VM:BaseViewModel<*>,DB: ViewDataBinding>:Fragment() 
             }
 
         }
-
         return viewBinding.root
     }
 
 
     abstract fun getLayoutId(): Int
-    abstract fun inilazeViewModel(): VM
+    abstract fun initializeViewModel(): VM
 
 
 
@@ -80,5 +80,7 @@ abstract class BaseFragment<VM:BaseViewModel<*>,DB: ViewDataBinding>:Fragment() 
     fun makeToast(message:String){
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
+
+
 
 }
